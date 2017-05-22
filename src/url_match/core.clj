@@ -17,12 +17,10 @@
 (defn- make-query-re
   [query]
   (when-not (empty? query)
-    ; (str "\\?.*" (s/join "&?" (map #(str "(?:" % ")") (map #(s/replace % param "(.+)&?") query))))
-    (str
-      "\\?.*"
-      (s/join "&" (map #(str "(?:" % ")") (map #(s/replace % param "(\\\\w+)") query))))))
-
-; "[&.]*"
+    (str "\\?.*"
+      (s/join "&"
+        (map #(str "(?:" % ")")
+          (map #(s/replace % param "(\\\\w+)") query))))))
 
 (defn- make-regex
   [pattern]
