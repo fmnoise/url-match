@@ -10,6 +10,7 @@
 (def dribbble-url "https://dribbble.com/shots/1905065-Travel-Icons-pack?offset=1&list=users")
 (def bad-dribbble-url "https://dribbble.com/shots/1905065-Travel-Icons-pack?list=users")
 (def bad-twitter-url "https://twitter.com/shots/1905065-Travel-Icons-pack?list=users&offset=1")
+
 (def twitter-params [[:user "bradfitz"] [:id "562360748727611392"]])
 (def dribbble-params [[:id "1905065-Travel-Icons-pack"] [:offset "1"]])
 (def dribbble2-params [[:id "1905065-Travel-Icons-pack"] [:offset "1"] [:type "users"]])
