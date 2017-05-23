@@ -17,12 +17,13 @@
 (defn- make-query-re
   [query]
   (when-not (empty? query)
-    (str "\\?.*"
-      (s/join "&"
-        (map #(str "(?:" % ")")
-          (map #(s/replace % param "(\\\\w+)") query))))))
+    (->> query
+         (map #(s/replace % param "(\\\\w+)"))
+         (map #(str "(?=.*" % ")"))
+         s/join
+         (#(str "\\?.*" % ".+")))))
 
-(defn- make-regex
+(defn- make-pattern-regex
   [pattern]
   (re-pattern
     (str
@@ -36,13 +37,24 @@
     (map (comp keyword last) (re-seq param (:path pattern)))
     (map (comp keyword last #(s/split % #"=\?")) (:query pattern))))
 
+(defn- try-int
+  [val]
+  (if-let [int-value (re-find #"^[1-9]\d*$" val)]
+    (read-string int-value)
+    val))
+
+
 (defn new-pattern
   [template]
   {:host  (last (re-find host template))
    :path  (last (re-find path template))
    :query (map last (re-seq query template))})
 
+; TODO: use named regexp groups instead of zipmap
 (defn recognize
   [pattern url]
-  (when-let [vals (re-seq (make-regex pattern) url)]
-    (into [] (zipmap (extract-keys pattern) (rest (first vals))))))
+  (when-let [values (re-seq (make-pattern-regex pattern) url)]
+    (->> (zipmap (extract-keys pattern) (rest (first values)))
+         (into [])
+         (map (fn [[k v]] [k (try-int v)]))
+         sort)))
