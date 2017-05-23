@@ -1,12 +1,14 @@
 # url-match
 
-A Clojure library designed to extract url parts using given pattern
+A Clojure library for matching/extracting url parts using given pattern
 
 ## Usage
 
 **!!! This is not published to clojars**
 
 ```clojure
+(require '[url-match.core :refer [new-pattern recognize]])
+
 (def dribbble (new-pattern "host(dribbble.com); path(shots/?id); queryparam(list=?type); queryparam(offset=?offset);"))
 
 (recognize dribbble "https://dribbble.com/shots/1905065-Travel-Icons-pack?offset=1&list=users")
