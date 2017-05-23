@@ -43,7 +43,6 @@
     (read-string int-value)
     val))
 
-
 (defn new-pattern
   [template]
   {:host  (last (re-find host template))
