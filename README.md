@@ -4,7 +4,7 @@ A Clojure library designed to extract url parts using given pattern
 
 ## Usage
 
-**This is not published to clojars**
+**!!! This is not published to clojars**
 
 ```clojure
 (def dribbble (new-pattern "host(dribbble.com); path(shots/?id); queryparam(list=?type); queryparam(offset=?offset);"))
