@@ -1,4 +1,4 @@
-# url-match
+# url-match [![Build Status](https://travis-ci.org/fmnoise/url-match.svg?branch=master)](https://travis-ci.org/fmnoise/url-match)
 
 A Clojure library for matching/extracting url parts using given pattern
 
