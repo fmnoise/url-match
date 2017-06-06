@@ -4,7 +4,7 @@
 
 (def twitter (new-pattern "host(twitter.com); path(?user/status/?id);"))
 (def dribbble (new-pattern "host(dribbble.com); path(shots/?id); queryparam(offset=?offset);"))
-(def dribbble2 (new-pattern "host(dribbble.com); path(shots/?id); queryparam(list=?type); queryparam(offset=?offset);"))
+(def dribbble2 (new-pattern "queryparam(list=?type); queryparam(offset=?offset); path(shots/?id); host(dribbble.com);"))
 (def empty (new-pattern ""))
 
 (def twitter-url "http://twitter.com/bradfitz/status/562360748727611392")
